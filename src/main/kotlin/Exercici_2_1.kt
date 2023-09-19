@@ -5,7 +5,7 @@ import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.lang.StringBuilder
 
-fun main(args: Array<String>){
+fun main() {
     val filePath = "src/main/resources/Penyagolosa.bmp"
     val f = File(filePath)
     val fi = FitxerImatge(f)
@@ -14,15 +14,13 @@ fun main(args: Array<String>){
     fi.transformaBlancNegre()
 }
 
-
 class FitxerImatge(fEnt: File) {
     var f: File = File("")   // No modifiqueu aquesta línia. El seu valor s'ha de modificar en el constructor
-    lateinit var image : File
-
+    lateinit var newImage : File
 
     init {
         if (fEnt.exists() && fEnt.extension == "bmp") {
-            f = fEnt
+            this.f = fEnt
         } else {
             if (!fEnt.exists()) {
                 println("Error: No existeix l'archiu")
@@ -30,20 +28,15 @@ class FitxerImatge(fEnt: File) {
                 println("Error: L'extensio no es correcta")
             }
         }
-
-
         // Constructor
         // Control d'existència del fitxer i control de l'extensió .bmp (traure missatges d'error)
         // En cas que tot siga correcte, inicialitzar f amb fEnt
     }
 
-
     fun transformaNegatiu() {
-        var oldName = f.name
-        var newName = StringBuilder()
-
-        for (i in 0 until oldName.length){
-            val letter = oldName[i]
+        val oldName = f.name
+        val newName = StringBuilder()
+        for (letter in oldName){
             if (letter == '.') {
                 newName.append("_n.")
             } else {
@@ -51,10 +44,10 @@ class FitxerImatge(fEnt: File) {
             }
         }
 
-        image = File("src/main/resources/$newName")
-        val input = FileInputStream(f)
-        val output = FileOutputStream(image)
-        var imageByte = input.read()
+        this.newImage = File("src/main/resources/$newName")
+        val input = FileInputStream(this.f)
+        val output = FileOutputStream(this.newImage)
+        var imageByte: Int = input.read()
         var counter = 0
         while (imageByte != -1){
             if (counter < 55) {
@@ -73,10 +66,9 @@ class FitxerImatge(fEnt: File) {
 
 
     fun transformaObscur() {
-        var oldName = f.name
-        var newName = StringBuilder()
-        for (i in 0 until oldName.length){
-            val letter = oldName[i]
+        val oldName = f.name
+        val newName = StringBuilder()
+        for (letter in oldName){
             if (letter == '.') {
                 newName.append("_o.")
             } else {
@@ -84,9 +76,9 @@ class FitxerImatge(fEnt: File) {
             }
         }
 
-        image = File("src/main/resources/$newName")
-        val input = FileInputStream(f)
-        val output = FileOutputStream(image)
+        this.newImage = File("src/main/resources/$newName")
+        val input = FileInputStream(this.f)
+        val output = FileOutputStream(this.newImage)
         var imageByte = input.read()
         var counter = 0
         while (imageByte != -1){
@@ -102,30 +94,27 @@ class FitxerImatge(fEnt: File) {
         input.close()
         output.close()
         // Transformar a una imatge més fosca i guardar en _o.bmp
-
     }
 
 
     fun transformaBlancNegre() {
-        var oldName = f.name
-        var newName = StringBuilder()
-        for (i in 0 until oldName.length){
-            val letter = oldName[i]
+        val oldName = f.name
+        val newName = StringBuilder()
+        for (letter in oldName){
             if (letter == '.') {
                 newName.append("_bn.")
             } else {
                 newName.append(letter)
             }
         }
-        image = File("src/main/resources/$newName")
-        val input = FileInputStream(f)
-        val output = FileOutputStream(image)
+        this.newImage = File("src/main/resources/$newName")
+        val input = FileInputStream(this.f)
+        val output = FileOutputStream(this.newImage)
         var imageByte = input.read()
         var counter = 0
         while (imageByte != -1){
             if (counter < 55) {
                 output.write(imageByte)
-
             } else {
                 val r = imageByte
                 val g = input.read()
@@ -143,7 +132,5 @@ class FitxerImatge(fEnt: File) {
         input.close()
         output.close()
         // Transformar a una imatge en blanc i negre i guardar en _bn.bmp
-
-
     }
 }
