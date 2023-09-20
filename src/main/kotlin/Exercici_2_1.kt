@@ -6,7 +6,7 @@ import java.io.FileOutputStream
 import java.lang.StringBuilder
 
 fun main() {
-    val filePath = "src/main/resources/Penyagolosa.bmp"
+    val filePath = "Penyagolosa.bmp"
     val f = File(filePath)
     val fi = FitxerImatge(f)
     fi.transformaNegatiu()
@@ -44,7 +44,7 @@ class FitxerImatge(fEnt: File) {
             }
         }
 
-        this.newImage = File("src/main/resources/$newName")
+        this.newImage = File("$newName")
         val input = FileInputStream(this.f)
         val output = FileOutputStream(this.newImage)
         var imageByte: Int = input.read()
@@ -76,7 +76,7 @@ class FitxerImatge(fEnt: File) {
             }
         }
 
-        this.newImage = File("src/main/resources/$newName")
+        this.newImage = File("$newName")
         val input = FileInputStream(this.f)
         val output = FileOutputStream(this.newImage)
         var imageByte = input.read()
@@ -107,7 +107,7 @@ class FitxerImatge(fEnt: File) {
                 newName.append(letter)
             }
         }
-        this.newImage = File("src/main/resources/$newName")
+        this.newImage = File("$newName")
         val input = FileInputStream(this.f)
         val output = FileOutputStream(this.newImage)
         var imageByte = input.read()
