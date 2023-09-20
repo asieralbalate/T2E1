@@ -34,17 +34,7 @@ class FitxerImatge(fEnt: File) {
     }
 
     fun transformaNegatiu() {
-        val oldName = f.name
-        val newName = StringBuilder()
-        for (letter in oldName){
-            if (letter == '.') {
-                newName.append("_n.")
-            } else {
-                newName.append(letter)
-            }
-        }
-
-        this.newImage = File("$newName")
+        this.newImage = File(f.name.replace(".bmp", "_n.bmp"))
         val input = FileInputStream(this.f)
         val output = FileOutputStream(this.newImage)
         var imageByte: Int = input.read()
@@ -66,17 +56,7 @@ class FitxerImatge(fEnt: File) {
 
 
     fun transformaObscur() {
-        val oldName = f.name
-        val newName = StringBuilder()
-        for (letter in oldName){
-            if (letter == '.') {
-                newName.append("_o.")
-            } else {
-                newName.append(letter)
-            }
-        }
-
-        this.newImage = File("$newName")
+        this.newImage = File(f.name.replace(".bmp", "_o.bmp"))
         val input = FileInputStream(this.f)
         val output = FileOutputStream(this.newImage)
         var imageByte = input.read()
@@ -98,16 +78,7 @@ class FitxerImatge(fEnt: File) {
 
 
     fun transformaBlancNegre() {
-        val oldName = f.name
-        val newName = StringBuilder()
-        for (letter in oldName){
-            if (letter == '.') {
-                newName.append("_bn.")
-            } else {
-                newName.append(letter)
-            }
-        }
-        this.newImage = File("$newName")
+        this.newImage = File(f.name.replace(".bmp", "_bn.bmp"))
         val input = FileInputStream(this.f)
         val output = FileOutputStream(this.newImage)
         var imageByte = input.read()
